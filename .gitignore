@@ -131,3 +131,6 @@ dmypy.json
 
 # python venv
 pyvenv.cfg
+
+# db credentials
+.credentials.yml

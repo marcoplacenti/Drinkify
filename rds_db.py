@@ -6,12 +6,21 @@ Created on Sat Jul 25 13:34:18 2020
 """
 
 import pymysql
+import yaml
+
+with open('.credentials.yml') as infile:
+    cred = yaml.load(infile, Loader=yaml.SafeLoader)
+    host = cred['host']
+    user = cred['user']
+    pwd = cred['password']
+    db = cred['database']
+
 conn = pymysql.connect(
-        host= 'drinkify-db.coewldes9avc.eu-north-1.rds.amazonaws.com', #endpoint link
-        port = 3306, # 3306
-        user = 'admin', # admin
-        password = 'MyAdminPwd', #adminadmin
-        db = 'drinkifydb', #test    
+        host= host,
+        port = 3306,
+        user = user,
+        password = pwd,
+        db = db
         )
 
 #Table Creation
