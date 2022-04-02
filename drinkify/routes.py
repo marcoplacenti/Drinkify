@@ -1,5 +1,6 @@
 from drinkify import app
-from flask import render_template
+from flask import render_template, request
+from drinkify import db
 
 @app.route('/')
 def index():
