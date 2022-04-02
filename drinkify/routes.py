@@ -1,16 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jul 25 12:02:51 2020
-
-@author: hp
-"""
-
-from flask import Flask, render_template, request, flash, redirect,url_for, jsonify, session 
-from flask import Response,send_file
-
-app = Flask(__name__)
-
-import rds_db as db
+from drinkify import app
+from flask import render_template
 
 @app.route('/')
 def index():
@@ -26,8 +15,3 @@ def insert():
         comment = request.form['comment']
         db.insert_details(name,email,comment,gender)
         return render_template('index.html')
-
-
-if __name__ == "__main__":
-    
-    app.run(debug=True)

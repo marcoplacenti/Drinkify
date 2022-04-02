@@ -5,9 +5,6 @@ Created on Sat Jul 25 13:34:18 2020
 @author: hp
 """
 
-import pymysql
-import yaml
-
 with open('.credentials.yml') as infile:
     cred = yaml.load(infile, Loader=yaml.SafeLoader)
     host = cred['host']
