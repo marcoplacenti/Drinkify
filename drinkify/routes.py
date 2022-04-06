@@ -15,10 +15,11 @@ def main():
 @app.route('/drink', methods = ['get', 'post'])
 def drink():
     data = db.get_drinks()
+    print(data)
     total = 0
-    send_data = []
-    #print(data)
-    for row in data:
+    l = len(data)
+    send_data = [None] * l
+    for i, row in enumerate(data):
         d = {
             "drink": row[2],
             "amount": row[3],
@@ -26,8 +27,9 @@ def drink():
             "timestamp": row[5],
             "location": row[6]
         }
+
         total += d['water_amount']
-        send_data.append(d)
+        send_data[-i-1] = d
     
     goal = 2000
     progress = str(min(100, int((total/goal)*100)))
@@ -40,6 +42,7 @@ def drink():
         timestamp = request.form['timestamp']
         location = request.form['location']
         db.insert_drink(userID, drink_id, drink, amount, timestamp, location)
+
         return redirect(url_for('drink'))
     
     return render_template('drink.html', data=send_data, progress=progress, total=total) 
@@ -51,23 +54,24 @@ def clear_history():
     
 @app.route('/visuals')
 def visuals():
-    data = db.get_drinks()
-    df = []
-    for row in data:
-        d = {
-            "drink": row[2],
-            "amount": row[3],
-            "timestamp": row[4],
-            "location": row[5]
-        }
-        df.append(d)
-    df = pd.DataFrame(df)
-    df.timestamp = df.timestamp.apply(pd.to_datetime)
+
+    # data = db.get_drinks()
+    # df = []
+    # for row in data:
+    #     d = {
+    #         "drink": row[1],
+    #         "amount": row[2],
+    #         "timestamp": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(float(row[3])))
+    #     }
+    #     df.append(d)
+    # df = pd.DataFrame(df)
+    # df.timestamp = df.timestamp.apply(pd.to_datetime)
     
-    df.to_csv(r'C:\Users\morte\OneDrive\Dokumenter\GitHub\Drinkify\test.csv')
+    # df.to_csv(r'C:\Users\morte\OneDrive\Dokumenter\GitHub\Drinkify\test.csv')
 
-    df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
-    df_hour = df_hour.reset_index()
-    df_hour['hour'] = df_hour.timestamp.dt.hour
+    # df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
+    # df_hour = df_hour.reset_index()
+    # df_hour['hour'] = df_hour.timestamp.dt.hour
 
-    return render_template('visuals.html', data=df_hour.to_json(orient='records'))
+    #return render_template('visuals.html', data=df_hour.to_json(orient='records'))
+    return "OK"

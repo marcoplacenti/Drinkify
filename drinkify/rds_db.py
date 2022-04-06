@@ -25,6 +25,7 @@ conn = pymysql.connect(
 
 cursor=conn.cursor()
 drink_table = """
+
 create table if not exists drink_logs(
     userID int,
     drink_id varchar(100),
@@ -37,6 +38,7 @@ create table if not exists drink_logs(
 """
 cursor.execute(drink_table)
 #cursor.execute("drop table drink_logs")
+
 
 def delete_history():
     cur = conn.cursor()
