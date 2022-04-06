@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+    function now() {
+        const val = document.querySelector('input').value;
+        console.log(val);
+    }
+</script>
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,9 +30,12 @@
         <p>Time to insert your data</p>
         <form action="/drink" method="POST">
             <!--- User id, drink, amount, time-->
-            <select name="drink" size="2">
+            <input type="datetime-local" name="timestamp" value=now() REQUIRED>
+            <br>
+            <select name="drink" size="3">
                 <option value="Water" selected="selected">Water</option>
                 <option value="Coffee">Coffee</option>
+                <option value="Beer">Beer</option>
             </select>
             <br>
             <select name="amount" size="5" value="50">
@@ -35,6 +46,13 @@
                 <option value="500">500 ml</option>
             </select>
             <br>
+            <select name="location" size="4" value="Home">
+                <option value="Home">Home</option>
+                <option value="Work">Work</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="School" selected="selected">School</option>
+            </select>
+            <br>
             <input type="submit" name="submit" value="Submit" class="btn btn-success">
         </form>
     </div>
@@ -42,6 +60,10 @@
     <h2>History</h2>
     <br>
 
+    <form action="/clear" methid="POST">
+        <button type="submit" value="clear">Clear</button>
+    </form>
+    
     <table class="table table-hover">
         <thead>
         
@@ -50,6 +72,8 @@
                 <th scope="col">Time</th>
                 <th scope="col">Drink</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Water Amount</th>
+                <th scope="col">Location</th>
             </tr>
         </thead>
         <tbody>
@@ -59,6 +83,9 @@
                     <td>{{item.timestamp}}</td>
                     <td>{{item.drink}}</td>
                     <td>{{item.amount}}</td>
+                    <td>{{item.water_amount}}</td>
+
+                    <td>{{item.location}}</td>
                 </tr>
             {% endfor %}
         </tbody>

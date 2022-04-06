@@ -1,3 +1,5 @@
 flask
 pymysql
 pyyaml
+pandas
+uuid
