@@ -23,39 +23,43 @@ conn = pymysql.connect(
         db = db
         )
 
-#Table Creation
 cursor=conn.cursor()
-create_table="""
-create table if not exists Details (name varchar(200),email varchar(200),comment varchar(200),gender varchar(20) )
-"""
-cursor.execute(create_table)
-
-def insert_details(name,email,comment,gender):
-    cur=conn.cursor()
-    cur.execute("INSERT INTO Details (name,email,comment,gender) VALUES (%s,%s,%s,%s)", (name,email,comment,gender))
-    conn.commit()
-    return
-
-def get_details():
-    cur=conn.cursor()
-    cur.execute("SELECT * FROM Details")
-    details = cur.fetchall()
-    return details
-
-
 drink_table = """
-create table if not exists Drink (userID int, drink ENUM('Water', 'Coffee', 'Beer'), amount int, time varchar(100), location ENUM('Home', 'School', 'Restaurant', 'Work'))
-"""
-cursor.execute("""DROP TABLE if exists Drink;""")
-cursor.execute(drink_table)
 
-def insert_drink(userID, drink, amount, location, time):
+create table if not exists drink_logs(
+    userID int,
+    drink_id varchar(100),
+    drink ENUM('Water', 'Coffee', 'Beer'),
+    amount int, 
+    water_amount float,
+    time varchar(100),
+    location varchar(100)
+)
+"""
+cursor.execute(drink_table)
+#cursor.execute("drop table drink_logs")
+
+
+def delete_history():
+    cur = conn.cursor()
+    cursor.execute("truncate drink_logs")
+    conn.commit()
+
+def insert_drink(userID, drink_id, drink, amount, time, location):
+    water_amount = None
+    if drink == 'Water':
+        water_amount = amount
+    elif drink == 'Coffee':
+        water_amount = str(int(amount)*0.5)
+    elif drink == 'Beer':
+        water_amount = str(int(amount)*0.1)
+        
     cur=conn.cursor()
-    cur.execute("INSERT INTO Drink (userID, drink, amount, time, location) VALUES (%s,%s,%s,%s,%s)", (userID, drink, amount, time, location))
+    cur.execute("INSERT INTO drink_logs (userID, drink_id, drink, amount, water_amount, time, location) VALUES (%s,%s,%s,%s,%s,%s,%s)", (userID, drink_id, drink, amount, water_amount, time, location))
     conn.commit()
 
 def get_drinks():
     cur=conn.cursor()
-    cur.execute("SELECT * FROM Drink")
+    cur.execute("SELECT * FROM drink_logs")
     drinks = cur.fetchall()
     return drinks
