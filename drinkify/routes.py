@@ -4,6 +4,7 @@ from drinkify import db
 import time
 import pandas as pd
 import uuid
+from datetime import datetime
 
 
 #test = ((1, 'Water', 100, '1649070379.648753'), (1, 'Water', 100, '1649070426.912624'), (1, 'Water', 100, '1649070607.295744'), (1, 'Water', 100, '1649070647.2487102'), (1, 'Water', 100, '1649070702.4659996'), (1, 'Water', 100, '1649070723.6206126'), (1, 'Water', 100, '1649070834.7059758'), (1, 'Water', 100, '1649071127.0913403'))
@@ -40,6 +41,8 @@ def drink():
         drink = request.form['drink']
         amount = request.form['amount']
         timestamp = request.form['timestamp']
+        #reformat timestamp
+        timestamp = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
         location = request.form['location']
         db.insert_drink(userID, drink_id, drink, amount, timestamp, location)
 
@@ -55,17 +58,19 @@ def clear_history():
 @app.route('/visuals')
 def visuals():
 
-    # data = db.get_drinks()
-    # df = []
-    # for row in data:
-    #     d = {
-    #         "drink": row[1],
-    #         "amount": row[2],
-    #         "timestamp": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(float(row[3])))
-    #     }
-    #     df.append(d)
-    # df = pd.DataFrame(df)
-    # df.timestamp = df.timestamp.apply(pd.to_datetime)
+    data = db.get_drinks()
+    print(data)
+    df = []
+    for row in data:
+        d = {
+            "drink": row[2],
+            "amount": row[3],
+            "timestamp": datetime.strptime(row[5], '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M'),
+            "location": row[6]
+        }
+        df.append(d)
+    df = pd.DataFrame(df)
+    df.timestamp = df.timestamp.apply(pd.to_datetime)
     
     # df.to_csv(r'C:\Users\morte\OneDrive\Dokumenter\GitHub\Drinkify\test.csv')
 
@@ -73,7 +78,7 @@ def visuals():
     # df_hour = df_hour.reset_index()
     # df_hour['hour'] = df_hour.timestamp.dt.hour
 
-    return render_template('visuals.html', labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'])
+    return render_template('visuals.html',)
 
 
 @app.route('/settings')

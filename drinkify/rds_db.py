@@ -36,8 +36,9 @@ create table if not exists drink_logs(
     location varchar(100)
 )
 """
+#cursor.execute("drop table if exists drink_logs")
 cursor.execute(drink_table)
-#cursor.execute("drop table drink_logs")
+
 
 
 def delete_history():
