@@ -75,3 +75,7 @@ def visuals():
 
     #return render_template('visuals.html', data=df_hour.to_json(orient='records'))
     return "OK"
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
