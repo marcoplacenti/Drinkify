@@ -43,7 +43,6 @@ cursor.execute(drink_table)
 def delete_history():
     cur = conn.cursor()
     cursor.execute("truncate drink_logs")
-    conn.commit()
 
 def insert_drink(userID, drink_id, drink, amount, time, location):
     water_amount = None
@@ -53,7 +52,7 @@ def insert_drink(userID, drink_id, drink, amount, time, location):
         water_amount = str(int(amount)*0.5)
     elif drink == 'Beer':
         water_amount = str(int(amount)*0.1)
-        
+
     cur=conn.cursor()
     cur.execute("INSERT INTO drink_logs (userID, drink_id, drink, amount, water_amount, time, location) VALUES (%s,%s,%s,%s,%s,%s,%s)", (userID, drink_id, drink, amount, water_amount, time, location))
     conn.commit()
