@@ -44,15 +44,16 @@ def get_details():
 
 
 drink_table = """
-create table if not exists Drink (userID int, drink ENUM('Water', 'Coffee'), amount int, time varchar(100))
+create table if not exists Drink (userID int, drink ENUM('Water', 'Coffee', 'Beer'), amount int, time varchar(100), location ENUM('Home', 'School', 'Restaurant', 'Work'))
 """
-cursor.execute("""DROP TABLE Drink;""")
+cursor.execute("""DROP TABLE if exists Drink;""")
 cursor.execute(drink_table)
 
-def insert_drink(userID, drink, amount, time):
+def insert_drink(userID, drink, amount, location, time):
     cur=conn.cursor()
-    cur.execute("INSERT INTO Drink (userID, drink, amount, time) VALUES (%s,%s,%s,%s)", (userID, drink, amount, time))
+    cur.execute("INSERT INTO Drink (userID, drink, amount, time, location) VALUES (%s,%s,%s,%s,%s)", (userID, drink, amount, time, location))
     conn.commit()
+
 def get_drinks():
     cur=conn.cursor()
     cur.execute("SELECT * FROM Drink")
