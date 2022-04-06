@@ -73,8 +73,8 @@ def visuals():
     # df_hour = df_hour.reset_index()
     # df_hour['hour'] = df_hour.timestamp.dt.hour
 
-    #return render_template('visuals.html', data=df_hour.to_json(orient='records'))
-    return "OK"
+    return render_template('visuals.html', labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'])
+
 
 @app.route('/settings')
 def settings():
