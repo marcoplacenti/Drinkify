@@ -1,47 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+    function now() {
+        const val = document.querySelector('input').value;
+        console.log(val);
+    }
+</script>
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Drinkify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/base.css')  }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/drink.css')  }}">
 </head>
 <body>
-    <nav>
+    <nav class="navbar fixed-top navbar-light bg-light">
         <a href="drink" >Home</a>
-        <a href="visuals">About</a>
+        <a href="visuals">Visuals</a>
+        <a href="settings">Settings</a>
     </nav>
-
+    
+    <h1>Hello, User!</h1>
+      
+    <h3>Your daily water intake</h2>
     <div class ="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">{{total}} ml</div>
     </div>
-
-    <h1>Post drink information</h1>
-    <div>
-        <p>Time to insert your data</p>
-        <form action="/drink" method="POST">
-            <!--- User id, drink, amount, time-->
-            <select name="drink" size="2">
-                <option value="Water" selected="selected">Water</option>
-                <option value="Coffee">Coffee</option>
-            </select>
+    
+    <p>Click the drink to log your intake</p>
+    <div class="openBtn">
+      <button class="openButton" onclick="openForm()"><img class = "loginimg" src="{{ url_for('static', filename = 'img/plus.png')  }}"></button>
+    </div>
+    <div class="loginPopup">
+      <div class="formPopup" id="popupForm">
+        <form action="/drink" class="formContainer" method="post">
+          <input type="datetime-local" name="timestamp" value=now() REQUIRED>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Type of bevarage</label>
+                <select name="drink" class="form-control" id="exampleFormControlSelect1">
+                  <option value="Water">Water</option>
+                  <option value="Coffee">Coffee</option>
+                  <option value="Beer">Beer</option>
+                </select>
+            </div>
             <br>
-            <select name="amount" size="5" value="50">
-                <option value="50">50 ml</option>
-                <option value="100">100 ml</option>
-                <option value="200">200 ml</option>
-                <option value="300" selected="selected">300 ml</option>
-                <option value="500">500 ml</option>
-            </select>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Amount</label>
+                <select name="amount" class="form-control" id="exampleFormControlSelect1">
+                    <option value="50">50 ml</option>
+                    <option value="100">100 ml</option>
+                    <option value="200">200 ml</option>
+                    <option value="300" selected="selected">300 ml</option>
+                    <option value="500">500 ml</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Location</label>
+                <select name="location" class="form-control" id="exampleFormControlSelect1">
+                    <option value="Home" selected="selected">Home</option>
+                    <option value="Work">Work</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="School">School</option>
+                </select>
+            </div>
             <br>
             <input type="submit" name="submit" value="Submit" class="btn btn-success">
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </form>
+      </div>
     </div>
+    <script>
+      function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+      }
+      function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+      }
+    </script>
+
+
+    <br><br><br>
 
     <h2>History</h2>
     <br>
 
+    <form action="/clear" methid="POST">
+        <button type="submit" value="clear">Clear</button>
+    </form>
+    
     <table class="table table-hover">
         <thead>
         
@@ -50,6 +101,8 @@
                 <th scope="col">Time</th>
                 <th scope="col">Drink</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Water Amount</th>
+                <th scope="col">Location</th>
             </tr>
         </thead>
         <tbody>
@@ -59,6 +112,9 @@
                     <td>{{item.timestamp}}</td>
                     <td>{{item.drink}}</td>
                     <td>{{item.amount}}</td>
+                    <td>{{item.water_amount}}</td>
+
+                    <td>{{item.location}}</td>
                 </tr>
             {% endfor %}
         </tbody>

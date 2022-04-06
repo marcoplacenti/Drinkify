@@ -1,3 +1,4 @@
+console.log(labels)
 const ctx = document.getElementById('mychart');
 const myChart = new Chart(ctx, {
     type: 'bar',
