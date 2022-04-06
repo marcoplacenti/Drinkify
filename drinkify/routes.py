@@ -2,6 +2,7 @@ from drinkify import app
 from flask import render_template, request, redirect, url_for
 from drinkify import db
 import time
+import pandas as pd
 
 @app.route('/')
 def index():
@@ -43,7 +44,7 @@ def drink():
         userID = 1
         drink = request.form['drink']
         amount = request.form['amount']
-        timestamp = str(time.time())
+        timestamp = str(time.time()) 
         db.insert_drink(userID, drink, amount, timestamp)
         return redirect(url_for('drink'))
     
@@ -51,4 +52,22 @@ def drink():
     
 @app.route('/visuals')
 def visuals():
-    return render_template('visuals.html')
+    data = db.get_drinks()
+    df = []
+    for row in data:
+        d = {
+            "drink": row[1],
+            "amount": row[2],
+            "timestamp": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(float(row[3])))
+        }
+        df.append(d)
+    df = pd.DataFrame(df)
+    df.timestamp = df.timestamp.apply(pd.to_datetime)
+    
+    df.to_csv(r'C:\Users\morte\OneDrive\Dokumenter\GitHub\Drinkify\test.csv')
+
+    df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
+    df_hour = df_hour.reset_index()
+    df_hour['hour'] = df_hour.timestamp.dt.hour
+
+    return render_template('visuals.html', data=df_hour.to_json(orient='records'))

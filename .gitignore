@@ -134,3 +134,4 @@ pyvenv.cfg
 
 # db credentials
 .credentials.yml
+*.csv
