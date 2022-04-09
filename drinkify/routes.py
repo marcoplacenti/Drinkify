@@ -16,7 +16,7 @@ def main():
 @app.route('/drink', methods = ['get', 'post'])
 def drink():
     data = db.get_drinks()
-    print(data)
+    #print(data)
     total = 0
     l = len(data)
     send_data = [None] * l
@@ -32,17 +32,15 @@ def drink():
         total += d['water_amount']
         send_data[-i-1] = d
     
-    goal = 2000
+    goal = db.get_goal()
     progress = str(min(100, int((total/goal)*100)))
 
     if request.method == 'POST':
         userID = 1
-        drink_id = uuidOne = uuid.uuid1()
+        drink_id = uuid.uuid1()
         drink = request.form['drink']
         amount = request.form['amount']
-        timestamp = request.form['timestamp']
-        #reformat timestamp
-        timestamp = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
+        timestamp = request.form['logTime']
         location = request.form['location']
         db.insert_drink(userID, drink_id, drink, amount, timestamp, location)
 
@@ -53,6 +51,13 @@ def drink():
 @app.route('/clear')
 def clear_history():
     db.delete_history()
+    return redirect("/drink", code=302)
+
+@app.route('/setGoal', methods = ['get', 'post'])
+def set_goal():
+    if request.method == 'POST':
+        goal = request.form['goal']
+        db.set_goal(goal)
     return redirect("/drink", code=302)
     
 @app.route('/visuals')
@@ -65,12 +70,12 @@ def visuals():
         d = {
             "drink": row[2],
             "amount": row[3],
-            "timestamp": datetime.strptime(row[5], '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M'),
+            "timestamp": row[5],
             "location": row[6]
         }
         df.append(d)
-    df = pd.DataFrame(df)
-    df.timestamp = df.timestamp.apply(pd.to_datetime)
+    #df = pd.DataFrame(df)
+    #df.timestamp = df.timestamp.apply(pd.to_datetime)
     
     # df.to_csv(r'C:\Users\morte\OneDrive\Dokumenter\GitHub\Drinkify\test.csv')
 

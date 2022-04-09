@@ -14,6 +14,9 @@
         <a href="visuals">Visuals</a>
         <a href="settings">Settings</a>
     </nav>
-    <h1>Hello</h1>
+    <form action="/setGoal" method="POST">
+        <input type="number" id="goal" name="goal" value=2000 min=500 max=10000>
+        <button type="submit" value="Set Goal">Set Goal</button>
+    </form>
 </body>
 </html>
