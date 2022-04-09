@@ -78,15 +78,15 @@ def insert_drink(userID, drink_id, drink, amount, time, location):
 def get_drinks():
     cur=conn.cursor()
     cur.execute("SELECT * FROM drink_logs")
-    conn.commit()
     drinks = cur.fetchall()
+    conn.commit()
     return drinks
 
 def is_goal_set():
     cur = conn.cursor()
     cur.execute("select goal from goals where user_id = 1")
-    conn.commit()
     goal = cur.fetchone()
+    conn.commit()
     return goal
 
 def get_goal():

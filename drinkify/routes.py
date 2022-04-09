@@ -48,7 +48,7 @@ def drink():
     
     return render_template('drink.html', data=send_data, progress=progress, total=total) 
 
-@app.route('/clear')
+@app.route('/clear', methods = ['get', 'post'])
 def clear_history():
     db.delete_history()
     return redirect("/drink", code=302)
@@ -59,6 +59,27 @@ def set_goal():
         goal = request.form['goal']
         db.set_goal(goal)
     return redirect("/drink", code=302)
+
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4207053/
+@app.route('/calcGoal', methods=['get', 'post'])
+def calc_goal():
+    if request.method == 'POST':
+        sex = request.form['sex']
+        age = request.form['age']
+
+        if sex == 'male':
+            if age == '14-18':
+                goal = 3300 * 0.75
+            if age == '19+':
+                goal = 3700 * 0.75
+        if sex == 'female':
+            if age == '14-18':
+                goal = 2300 * 0.75
+            if age == '19+':
+                goal = 2700 * 0.75
+
+        db.set_goal(int(goal))
+        return render_template('settings.html', goal=int(goal))
     
 @app.route('/visuals')
 def visuals():
@@ -88,4 +109,5 @@ def visuals():
 
 @app.route('/settings')
 def settings():
-    return render_template('settings.html')
+    goal = db.get_goal()
+    return render_template('settings.html', goal=goal)
