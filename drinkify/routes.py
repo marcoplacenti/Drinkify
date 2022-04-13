@@ -1,5 +1,5 @@
 from drinkify import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, jsonify, url_for
 from drinkify import db
 import time
 import pandas as pd
@@ -65,22 +65,27 @@ def visuals():
         d = {
             "drink": row[2],
             "amount": row[3],
-            "timestamp": datetime.strptime(row[5], '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M'),
+            "time": row[5],
             "location": row[6]
         }
         df.append(d)
     df = pd.DataFrame(df)
-    df.timestamp = df.timestamp.apply(pd.to_datetime)
-    
-    # df.to_csv(r'C:\Users\morte\OneDrive\Dokumenter\GitHub\Drinkify\test.csv')
+    df.time = df.time.apply(pd.to_datetime)
+    print(df)
+    print(df.to_json(orient='records', date_format='iso'))
+    df.to_csv(r'C:\Users\morte\OneDrive\Dokumenter\GitHub\Drinkify\test.csv')
 
     # df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
     # df_hour = df_hour.reset_index()
     # df_hour['hour'] = df_hour.timestamp.dt.hour
 
-    return render_template('visuals.html',)
+    return render_template('visuals.html', data = df.to_json(orient='records', date_format='iso'))
 
 
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
+@app.route('/test')
+def test():
+    return jsonify([1,2,3])
