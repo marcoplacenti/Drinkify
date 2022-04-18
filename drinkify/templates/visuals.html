@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/visuals.css')  }}">
 </head>
 <body>
+
+    <nav class="navbar fixed-top navbar-light bg-light">
+        <a href="drink" >Home</a>
+        <a href="visuals">Visuals</a>
+        <a href="settings">Settings</a>
+    </nav>
+    
     <script>// load data        
         var data = {{data | safe}}
     </script>
@@ -21,12 +28,6 @@
     <script src = "{{ url_for('static', filename = 'js/vegalite-initialization.js')  }}">
         // let's us use the vegalite api
     </script>
-
-    <nav class="navbar fixed-top navbar-light bg-light">
-        <a href="drink" >Home</a>
-        <a href="visuals">Visuals</a>
-        <a href="settings">Settings</a>
-    </nav>
     
     <div>
         <h2>Your first graph</h2>
