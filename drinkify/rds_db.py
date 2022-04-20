@@ -88,13 +88,13 @@ def tablerow():
 
 query = f"""
 INSERT INTO drink_logs (userID, drink_id, drink, amount, water_amount, timestamp, location) VALUES
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},
+    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
+    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
+    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
+    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
+    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
+    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
+    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
     {tablerow()};
 """
 
