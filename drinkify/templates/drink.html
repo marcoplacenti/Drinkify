@@ -78,14 +78,9 @@
     </script>
 
     <script>
-        function getTime(){
-            var timeControl = document.getElementById('logTime');
-            var today = new Date();
-            var hour = today.getHours();
-            var min = today.getMinutes();
-            timeControl.value = hour + ':' + min
-        }
-        
+        var date = new Date();
+        var currentTime = date.getHours() + ':' + date.getMinutes();
+        document.getElementById('logTime').value = currentTime;        
     </script>
     
 
