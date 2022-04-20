@@ -1,7 +1,5 @@
 body { 
     padding-top: 65px; 
-    padding-left: 5px;
-    padding-right: 5px;
     /* background colors*/
     /* Old browsers */
     /* background: #2a0caf; */
@@ -10,6 +8,10 @@ body {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /* background: linear-gradient(180deg, #ffffff, #5fbcf1); */
     
+}
+
+h1, h2, h3, p {
+    padding-left: 10px;
 }
 
 nav{

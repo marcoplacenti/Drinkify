@@ -18,8 +18,11 @@
 .openBtn {
   display: flex;
   justify-content: center;
-  padding-top: 10px;
+  padding-top: 25px;
   padding-bottom: 25px;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  background-color: #92cef3;
 }
 .openButton {
   border: none;
