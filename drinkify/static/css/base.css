@@ -1,3 +1,5 @@
+@font-face { font-family: SFPro; src: url('/static/fonts/SFProDisplay-Regular.ttf'); } 
+@font-face { font-family: SFPro-Bold; src: url('/static/fonts/SFProDisplay-Heavy.ttf'); } 
 body { 
     padding-top: 65px; 
     /* background colors*/
@@ -10,8 +12,14 @@ body {
     
 }
 
-h1, h2, h3, p {
+h1, h2 {
+    font-family:'SFPro-Bold';
     padding-left: 10px;
+}
+
+p, h3{
+    padding-left: 10px;
+    font-family:'SFPro';
 }
 
 nav{
