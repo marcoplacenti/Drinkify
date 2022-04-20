@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script>
-    function now() {
-        const val = document.querySelector('input').value;
-        console.log(val);
-    }
-</script>
     
 <head>
     <meta charset="UTF-8">
@@ -38,11 +32,11 @@
     <div class="loginPopup">
       <div class="formPopup" id="popupForm">
         <form action="/drink" class="formContainer" method="post">
-          <input type="datetime-local" name="timestamp" value=now() REQUIRED>
+            <input type="time" onload="getTime()" class="form-control" id="logTime" name="logTime" REQUIRED>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Type of bevarage</label>
                 <select name="drink" class="form-control" id="exampleFormControlSelect1">
-                  <option value="Water">Water</option>
+                  <option value="Water" selected="selected">Water</option>
                   <option value="Coffee">Coffee</option>
                   <option value="Beer">Beer</option>
                 </select>
@@ -83,13 +77,22 @@
       }
     </script>
 
-
-    <br><br><br>
+    <script>
+        function getTime(){
+            var timeControl = document.getElementById('logTime');
+            var today = new Date();
+            var hour = today.getHours();
+            var min = today.getMinutes();
+            timeControl.value = hour + ':' + min
+        }
+        
+    </script>
+    
 
     <h2>History</h2>
-    <br>
+    
 
-    <form action="/clear" methid="POST">
+    <form action="/clear" method="POST">
         <button type="submit" value="clear">Clear</button>
     </form>
     
