@@ -101,7 +101,7 @@ def visuals():
     # df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
     # df_hour = df_hour.reset_index()
     # df_hour['hour'] = df_hour.timestamp.dt.hour
-
+    print(df.to_json(orient='records', date_format='iso'))
     return render_template('visuals.html', data = df.to_json(orient='records', date_format='iso'))
 
 

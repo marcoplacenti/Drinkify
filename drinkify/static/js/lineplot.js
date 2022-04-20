@@ -1,7 +1,7 @@
 console.log(data)
 const linePlot = vl.markLine().
     encode(
-        vl.x().fieldO('time').timeUnit('hoursofhour'),
+        vl.x().fieldO('timestamp').timeUnit('hoursofhour'),
         vl.y().count()
     )
 linePlot
