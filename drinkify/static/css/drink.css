@@ -12,7 +12,9 @@
     height: auto;
 }
 
-
+#left {
+  color:#1c87c9;
+}
 .openBtn {
   display: flex;
   justify-content: center;

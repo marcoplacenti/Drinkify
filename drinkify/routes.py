@@ -44,6 +44,8 @@ def drink():
 
     progress = str(min(100, int((total/goal)*100)))
     
+    left_to_go = max(0, int(goal) - total)
+
     if request.method == 'POST':
         userID = 1
         drink_id = uuid.uuid1()
@@ -55,7 +57,7 @@ def drink():
 
         return redirect(url_for('drink'))
     
-    return render_template('drink.html', data=send_data, progress=progress, total=total) 
+    return render_template('drink.html', data=send_data, progress=progress, total=total, left_to_go=left_to_go) 
 
 @app.route('/clear', methods = ['get', 'post'])
 def clear_history():
