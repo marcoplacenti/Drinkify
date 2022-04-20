@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Drinkify</title>
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/base.css')  }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/drink.css')  }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/settings.css')  }}">
 </head>
 
 <body>
@@ -17,15 +17,22 @@
         <a href="visuals">Visuals</a>
         <a href="settings">Settings</a>
     </nav>
+
+    <h1>Goal</h1>
+    <p>You can use the button below to calculate your daily water intake goal based on your sex and age.</p>
+
+    <div class="openBtn">
+        <button class="openButton" onclick="calculateGoal()" class="btn btn-success">Calculate your goal!</button>
+    </div>
+    <br>
+    <p>Press Set Goal to save your goal</p>
     <form action="/setGoal" method="POST">
         <input type="number" id="goal" name="goal" value={{goal}} min=500 max=10000>
         <button type="submit" value="Set Goal" class="btn btn-success">Set Goal</button>
     </form>
 
-    <div class="openBtn">
-        <button class="openButton" onclick="calculateGoal()" class="btn btn-success">Calculate your goal!</button>
-    </div>
-
+    
+    
     <div class="loginPopup">
         <div class="formPopup" id="popupForm">
             <form action="/calcGoal" class="formContainer" method="post">
@@ -54,6 +61,13 @@
             </form>
         </div>
     </div>
+
+    <br><br><br>
+    <h1>Delete your history</h1>
+    <p>You can delete your history by pressing the button below. Note that it cannot be undone.</p>
+    <form action="/clear" method="POST">
+        <button type="submit" value="clear" class="btn btn-danger">Delete History</button>
+    </form>
 
     <script>
         function calculateGoal() {

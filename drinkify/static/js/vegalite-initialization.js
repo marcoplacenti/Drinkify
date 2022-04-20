@@ -16,7 +16,8 @@ const options = {
 
 // register vega and vega-lite with the API
 vl.register(vega, vegaLite, options);
-const width  = window.innerWidth || document.documentElement.clientWidth || 
-document.body.clientWidth;
-const height = window.innerHeight|| document.documentElement.clientHeight|| 
-document.body.clientHeight;
+var scale = 0.85;
+const width  = window.innerWidth*scale || document.documentElement.clientWidth*scale || 
+document.body.clientWidth*scale;
+const height = window.innerHeight*scale|| document.documentElement.clientHeight*scale|| 
+document.body.clientHeight*scale;

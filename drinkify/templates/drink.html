@@ -20,19 +20,20 @@
     
     <h1>Hello, User!</h1>
       
-    <h3>Your daily water intake</h2>
+    <h3>Your water intake today</h2>
     <div class ="progress">
         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">{{total}} ml</div>
     </div>
     
-    <p>Click the drink to log your intake</p>
+    <p>Click below to log your intake</p>
     <div class="openBtn">
-      <button class="openButton" onclick="openForm()"><img class = "loginimg" src="{{ url_for('static', filename = 'img/plus.png')  }}"></button>
+      <button class="openButton" onclick="openForm()"><img class = "loginimg" src="{{ url_for('static', filename = 'img/drink.png')  }}"></button>
     </div>
     <div class="loginPopup">
       <div class="formPopup" id="popupForm">
         <form action="/drink" class="formContainer" method="post">
             <input type="time" onload="getTime()" class="form-control" id="logTime" name="logTime" REQUIRED>
+            <br>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Type of bevarage</label>
                 <select name="drink" class="form-control" id="exampleFormControlSelect1">
@@ -79,17 +80,14 @@
 
     <script>
         var date = new Date();
-        var currentTime = date.getHours() + ':' + date.getMinutes();
+        // we add a zero to the hour or minute if its less than 10 so it becomes two digit
+        var currentTime = (date.getHours()<10?'0':'') + date.getHours() + ':' + (date.getMinutes()<10?'0':'') + date.getMinutes();
+        console.log(currentTime)
         document.getElementById('logTime').value = currentTime;        
     </script>
     
 
     <h2>History</h2>
-    
-
-    <form action="/clear" method="POST">
-        <button type="submit" value="clear">Clear</button>
-    </form>
     
     <table class="table table-hover">
         <thead>
