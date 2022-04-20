@@ -4,7 +4,7 @@ from drinkify import db
 import time
 import pandas as pd
 import uuid
-from datetime import datetime
+from datetime import datetime, date
 
 
 #test = ((1, 'Water', 100, '1649070379.648753'), (1, 'Water', 100, '1649070426.912624'), (1, 'Water', 100, '1649070607.295744'), (1, 'Water', 100, '1649070647.2487102'), (1, 'Water', 100, '1649070702.4659996'), (1, 'Water', 100, '1649070723.6206126'), (1, 'Water', 100, '1649070834.7059758'), (1, 'Water', 100, '1649071127.0913403'))
@@ -29,12 +29,21 @@ def drink():
             "location": row[6]
         }
 
-        total += d['water_amount']
-        send_data[-i-1] = d
-    
-    goal = db.get_goal()
-    progress = str(min(100, int((total/goal)*100)))
+        send_data[-i-1] = d #flip the order so the table is from new to old
 
+    df = pd.DataFrame(send_data)
+    df.timestamp = pd.to_datetime(df.timestamp)
+    
+    # filter the progress by today
+    today = pd.Timestamp('today')
+    mask = (df.timestamp.dt.date == today)
+    df_today = df[mask]
+
+    total = df_today.water_amount.sum()
+    goal = db.get_goal()
+
+    progress = str(min(100, int((total/goal)*100)))
+    
     if request.method == 'POST':
         userID = 1
         drink_id = uuid.uuid1()
@@ -85,7 +94,6 @@ def calc_goal():
 def visuals():
 
     data = db.get_drinks()
-    print(data)
     df = []
     for row in data:
         d = {
@@ -97,11 +105,9 @@ def visuals():
         df.append(d)
     df = pd.DataFrame(df)
     df.timestamp = df.timestamp.apply(pd.to_datetime)
-
     # df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
     # df_hour = df_hour.reset_index()
     # df_hour['hour'] = df_hour.timestamp.dt.hour
-    print(df.to_json(orient='records', date_format='iso'))
     return render_template('visuals.html', data = df.to_json(orient='records', date_format='iso'))
 
 
