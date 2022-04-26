@@ -38,14 +38,13 @@ def drink():
     today = pd.Timestamp('today')
     mask = (df.timestamp.dt.date == today)
     df_today = df[mask]
-
     total = df_today.water_amount.sum()
     goal = db.get_goal()
 
     progress = str(min(100, int((total/goal)*100)))
     
     left_to_go = max(0, int(goal) - total)
-
+    
     if request.method == 'POST':
         userID = 1
         drink_id = uuid.uuid1()
@@ -56,8 +55,19 @@ def drink():
         db.insert_drink(userID, drink_id, drink, amount, timestamp, location)
 
         return redirect(url_for('drink'))
-    
-    return render_template('drink.html', data=send_data, progress=progress, total=total, left_to_go=left_to_go) 
+    df_today['hourminute'] = df_today['timestamp'].dt.strftime('%H:%M')
+    df_today['timestamp'] = df_today['timestamp'].dt.strftime('%Y-%m-%d')
+    print(len(df_today))
+    if len(df_today) == 0:
+        d = {
+            "hourminute": "Go",
+            "drink": "get",
+            "amount": "yourself",
+            "water_amount": "a",
+            "location": "drink"
+        }
+        df_today = pd.DataFrame([d])
+    return render_template('drink.html', data=send_data, progress=progress, total=total, left_to_go=left_to_go, datatoday = df_today.to_dict(orient='records')) 
 
 @app.route('/clear', methods = ['get', 'post'])
 def clear_history():
@@ -101,6 +111,7 @@ def visuals():
         d = {
             "drink": row[2],
             "amount": row[3],
+            "water_amount": row[4],
             "timestamp": row[5],
             "location": row[6]
         }
@@ -110,7 +121,8 @@ def visuals():
     # df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
     # df_hour = df_hour.reset_index()
     # df_hour['hour'] = df_hour.timestamp.dt.hour
-    return render_template('visuals.html', data = df.to_json(orient='records', date_format='iso'))
+    goal = db.get_goal()
+    return render_template('visuals.html', data = df.to_json(orient='records'), goal = goal)
 
 
 @app.route('/settings')

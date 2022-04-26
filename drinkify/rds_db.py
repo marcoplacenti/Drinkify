@@ -71,8 +71,9 @@ def random_date(start_date, end_date):
 def tablerow():
     userID = "1"
     drink_id = f"{uuid.uuid1()}"
-    drink = random.choice(['Water', 'Coffee', 'Beer'])
-    amount = random.choice(['50', '100', '200', '300', '500'])
+    drink = random.choice(['Water','Water','Water',
+                          'Coffee','Coffee', 'Beer'])
+    amount = random.choice(['50', '100', '200', '300', '300', '500'])
     water_amount = None
     if drink == 'Water':
         water_amount = amount
@@ -90,12 +91,10 @@ def query_text(number_of_reps):
         s += str(tablerow())
         s += ", "
     return s[:-2] + ";"
-        
-
 
 query = f"""
 INSERT INTO drink_logs (userID, drink_id, drink, amount, water_amount, timestamp, location) VALUES
-    {query_text(500)}
+    {query_text(10)}
 """
 
 cursor.execute(query)

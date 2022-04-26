@@ -1,7 +1,12 @@
+@font-face { font-family: SFPro; src: url('/static/fonts/SFProDisplay-Regular.ttf'); } 
+
 * {
   box-sizing: border-box;
 }
 
+table.table-hover{
+  font-family: SFPro;
+}
 
 .progress{
     margin: 10px 10px 20px;

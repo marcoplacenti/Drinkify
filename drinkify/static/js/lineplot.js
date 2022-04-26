@@ -9,7 +9,7 @@ linePlot
     .width(width) // predefined as width of the screen
     .render()
     .then(viewElement => {
-        document.getElementById('chart1').appendChild(viewElement); 
+        document.getElementById('chart2').appendChild(viewElement); 
     })
 
 console.log("EHHEOFHEDJKNG")

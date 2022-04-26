@@ -89,12 +89,39 @@
         document.getElementById('logTime').value = currentTime;        
     </script>
     
+    <h3>Your intake today</h3>
+        
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <!--Column titles-->
+                <th scope="col">Time</th>
+                <th scope="col">Drink</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Water Amount</th>
+                <th scope="col">Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in datatoday %}
+            <!--Loop over the data passed on from routes.py-->
+                <tr>
+                    <td>{{item.hourminute}}</td>
+                    <td>{{item.drink}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.water_amount}}</td>
+                    <td>{{item.location}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
+    <br>
+    <button>Hello</button>
     <h3>History</h3>
     
     <table class="table table-hover">
         <thead>
-        
             <tr>
                 <!--Column titles-->
                 <th scope="col">Time</th>
@@ -112,7 +139,6 @@
                     <td>{{item.drink}}</td>
                     <td>{{item.amount}}</td>
                     <td>{{item.water_amount}}</td>
-
                     <td>{{item.location}}</td>
                 </tr>
             {% endfor %}
