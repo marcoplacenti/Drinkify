@@ -84,18 +84,18 @@ def tablerow():
     location = random.choice(['Home', 'Restaurant', 'Work','School'])
     return (userID, f'{drink_id}', f'{drink}', amount, water_amount, f'{date}', f'{location}')
 
+def query_text(number_of_reps):
+    s = ""
+    for i in range(number_of_reps):
+        s += str(tablerow())
+        s += ", "
+    return s[:-2] + ";"
+        
 
 
 query = f"""
 INSERT INTO drink_logs (userID, drink_id, drink, amount, water_amount, timestamp, location) VALUES
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
-    {tablerow()},{tablerow()}, {tablerow()}, {tablerow()},{tablerow()},{tablerow()},
-    {tablerow()};
+    {query_text(500)}
 """
 
 cursor.execute(query)
