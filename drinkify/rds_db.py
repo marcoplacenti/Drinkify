@@ -94,7 +94,7 @@ def query_text(number_of_reps):
 
 query = f"""
 INSERT INTO drink_logs (userID, drink_id, drink, amount, water_amount, timestamp, location) VALUES
-    {query_text(10)}
+    {query_text(600)}
 """
 
 cursor.execute(query)
