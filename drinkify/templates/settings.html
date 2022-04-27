@@ -62,7 +62,56 @@
         </div>
     </div>
 
-    <br><br><br>
+    <h1>History</h1>
+    <p>Press below to see your full intake history</p>
+    <div class="historyButton">
+        <button id = "historybutton" type="button" class="btn btn-primary">See full history</button>
+    </div>
+    
+    <div id="history" style="display:none;">
+        <h3>Your full intake history</h3>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <!--Column titles-->
+                    <th scope="col">Time</th>
+                    <th scope="col">Drink</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Water Amount</th>
+                    <th scope="col">Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <!--Loop over the data passed on from routes.py-->
+                    <tr>
+                        <td>{{item.timestamp}}</td>
+                        <td>{{item.drink}}</td>
+                        <td>{{item.amount}}</td>
+                        <td>{{item.water_amount}}</td>
+                        <td>{{item.location}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const targetDiv = document.getElementById("history")
+        const btn = document.getElementById("historybutton")
+        btn.onclick = function () {
+            if (targetDiv.style.display !== "none") {
+                targetDiv.style.display = "none";
+                btn.innerHTML = "See full history";
+            } else {
+                targetDiv.style.display = "block";
+                btn.innerHTML = "Hide full history";
+            }
+        };
+    </script>
+
+    
     <h1>Delete your history</h1>
     <p>You can delete your history by pressing the button below. Note that it cannot be undone.</p>
     <form action="/clear" method="POST">

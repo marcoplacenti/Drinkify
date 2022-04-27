@@ -117,51 +117,5 @@
     </table>
 
     
-    <div class="historyButton">
-        <button id = "historybutton" type="button" class="btn btn-primary">See full history</button>
-    </div>
-    
-    <div id="history" style="display:none;">
-        <h3>History</h3>
-        
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <!--Column titles-->
-                    <th scope="col">Time</th>
-                    <th scope="col">Drink</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Water Amount</th>
-                    <th scope="col">Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in data %}
-                <!--Loop over the data passed on from routes.py-->
-                    <tr>
-                        <td>{{item.timestamp}}</td>
-                        <td>{{item.drink}}</td>
-                        <td>{{item.amount}}</td>
-                        <td>{{item.water_amount}}</td>
-                        <td>{{item.location}}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <script>
-        const targetDiv = document.getElementById("history")
-        const btn = document.getElementById("historybutton")
-        btn.onclick = function () {
-            if (targetDiv.style.display !== "none") {
-                targetDiv.style.display = "none";
-                btn.innerHTML = "See full history";
-            } else {
-                targetDiv.style.display = "block";
-                btn.innerHTML = "Hide full history";
-            }
-        };
-    </script>
 </body>
 </html>

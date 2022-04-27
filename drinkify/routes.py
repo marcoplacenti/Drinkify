@@ -69,6 +69,26 @@ def drink():
         df_today = pd.DataFrame([d])
     return render_template('drink.html', data=send_data, progress=progress, total=total, left_to_go=left_to_go, datatoday = df_today.to_dict(orient='records')) 
 
+@app.route('/settings')
+def settings():
+    goal = db.get_goal()
+    data = db.get_drinks()
+    #print(data)
+    total = 0
+    l = len(data)
+    send_data = [None] * l
+    for i, row in enumerate(data):
+        d = {
+            "drink": row[2],
+            "amount": row[3],
+            "water_amount": row[4],
+            "timestamp": row[5],
+            "location": row[6]
+        }
+
+        send_data[-i-1] = d #flip the order so the table is from new to old
+    return render_template('settings.html', goal=goal, data=send_data)
+
 @app.route('/clear', methods = ['get', 'post'])
 def clear_history():
     db.delete_history()
@@ -123,9 +143,3 @@ def visuals():
     # df_hour['hour'] = df_hour.timestamp.dt.hour
     goal = db.get_goal()
     return render_template('visuals.html', data = df.to_json(orient='records'), goal = goal)
-
-
-@app.route('/settings')
-def settings():
-    goal = db.get_goal()
-    return render_template('settings.html', goal=goal)
