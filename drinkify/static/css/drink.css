@@ -52,6 +52,7 @@ table.table-hover{
   min-width: 250px;
   max-width: 500px;
   padding: 20px;
+  margin: auto;
   background-color: #fff;
 }
 .formContainer input[type=text],
@@ -70,7 +71,7 @@ table.table-hover{
 .formContainer .btn {
   padding: 12px 20px;
   border: none;
-  background-color: #8ebf42;
+  background-color: #1c87c9;
   color: #fff;
   cursor: pointer;
   width: 100%;
@@ -84,3 +85,4 @@ table.table-hover{
 .openButton:hover {
   opacity: 1;
 }
+
