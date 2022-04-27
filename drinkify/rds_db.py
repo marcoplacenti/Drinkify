@@ -55,8 +55,8 @@ cursor.execute(goal_table)
 conn.commit()
 
 ### POPULATE TABLE ###
-start_date = date(2022, 2, 20)
-end_date = date(2022, 4, 20)
+start_date = date(2022, 2, 26)
+end_date = date(2022, 4, 26)
 
 def random_date(start_date, end_date):
     time_between_dates = end_date - start_date
