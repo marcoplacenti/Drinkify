@@ -11,6 +11,3 @@ linePlot
     .then(viewElement => {
         document.getElementById('chart2').appendChild(viewElement); 
     })
-
-console.log("EHHEOFHEDJKNG")
-console.log(data['time'])
