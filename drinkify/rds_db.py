@@ -34,7 +34,7 @@ drink_table = """
 create table if not exists drink_logs(
     userID int,
     drink_id varchar(100),
-    drink ENUM('Water', 'Coffee', 'Beer'),
+    drink ENUM('Water', 'Coffee', 'Beer', 'Wine', 'Soda', 'Tea', 'Juice', 'Milk'),
     amount int, 
     water_amount int,
     timestamp varchar(100),
@@ -68,19 +68,33 @@ def random_date(start_date, end_date):
     random_date += " " + str(time)[:-3]
     return random_date
 
-def tablerow():
-    userID = "1"
-    drink_id = f"{uuid.uuid1()}"
-    drink = random.choice(['Water','Water','Water',
-                          'Coffee','Coffee', 'Beer'])
-    amount = random.choice(['50', '100', '200', '300', '300', '500'])
+def water_amount_calc(drink, amount):
     water_amount = None
     if drink == 'Water':
         water_amount = amount
     elif drink == 'Coffee':
-        water_amount = str(int(amount)*0.5)
+        water_amount = str(int(amount)*0.9875)
     elif drink == 'Beer':
-        water_amount = str(int(amount)*0.1)
+        water_amount = str(int(amount)*0.95)
+    elif drink == 'Wine':
+        water_amount = str(int(amount)*0.85)
+    elif drink == 'Soda':
+        water_amount = str(int(amount)*0.90)
+    elif drink == 'Tea':
+        water_amount = str(int(amount)*0.99)
+    elif drink == 'Juice':
+        water_amount = str(int(amount)*0.90)
+    elif drink == 'Milk':
+        water_amount = str(int(amount)*0.87)
+    return water_amount
+
+def tablerow():
+    userID = "1"
+    drink_id = f"{uuid.uuid1()}"
+    drink = random.choice(['Water','Water','Water','Water','Water', 'Coffee','Coffee','Coffee', 
+                            'Beer','Beer','Beer', 'Wine', 'Soda','Soda', 'Tea', 'Juice', 'Milk'])
+    amount = random.choice(['50', '100', '200', '300', '300', '500'])
+    water_amount = water_amount_calc(drink, amount)
     date = random_date(start_date, end_date)
     location = random.choice(['Home', 'Restaurant', 'Work','School'])
     return (userID, f'{drink_id}', f'{drink}', amount, water_amount, f'{date}', f'{location}')
@@ -106,13 +120,7 @@ def delete_history():
     conn.commit()
 
 def insert_drink(userID, drink_id, drink, amount, time, location):
-    water_amount = None
-    if drink == 'Water':
-        water_amount = amount
-    elif drink == 'Coffee':
-        water_amount = str(int(amount)*0.5)
-    elif drink == 'Beer':
-        water_amount = str(int(amount)*0.1)
+    water_amount = water_amount_calc(drink, amount)
 
     timestamp = str(date.today()) + ' ' + time
     #timestamp = datetime.strptime(today, '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
