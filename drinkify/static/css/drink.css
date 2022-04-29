@@ -4,15 +4,17 @@
   box-sizing: border-box;
 }
 
-table.table-hover{
+.input-group-text{
+  width: 40%;
+  text-align: right !important;
   font-family: SFPro;
 }
 
-.form-group, .form-control, .label{
+table.table-hover, .form-group, .form-control, .label{
   font-family: SFPro;
 }
 
-select.form-control {
+select.form-control { /* show arrow on dropdowns */  
   -webkit-appearance: menulist;
 }
 
