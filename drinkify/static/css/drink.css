@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-table.table-hover{
+table.table-hover, label, .form-group{
   font-family: SFPro;
 }
 
@@ -23,8 +23,8 @@ table.table-hover{
 .openBtn {
   display: flex;
   justify-content: center;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 15px;
+  padding-bottom: 30px;
 }
 .openButton {
   border: none;
