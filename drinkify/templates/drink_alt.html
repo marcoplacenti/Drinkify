@@ -33,51 +33,48 @@
     <p>Click below to log your intake</p>
 
         <form action="/drink" class="formContainer" method="post">
-            <label>Time</label>
-            <input type="time" onload="getTime()" class="form-control" id="logTime" name="logTime" REQUIRED>
-            <br>
+            <div class = "input-group mb-3">
+                <span class="input-group-text">Time</span>
+                <input type="time" onload="getTime()" class="form-control" id="logTime" name="logTime" REQUIRED>
+            </div>
+            
              <div class="form-group">
-                 <label for="exampleFormControlSelect1">Type of bevarage</label>
-                 <!-- 'Water', 'Coffee', 'Beer', 'Wine', 'Soda', 'Tea', 'Juice', 'Milk' -->
-                 <select name="drink" class="form-control" id="exampleFormControlSelect1">
-                   <option value="Water" selected="selected">Water</option>
-                   <option value="Coffee">Coffee</option>
-                   <option value="Beer">Beer</option>
-                   <option value="Wine">Wine</option>
-                   <option value="Soda">Soda</option>
-                   <option value="Tea">Tea</option>
-                   <option value="Juice">Juice</option>
-                   <option value="Milk">Milk</option>
-                 </select>
-             </div>
-             <br>
-            <!--<div class="form-group">
-                <label for="exampleFormControlSelect1">Amount</label>
-                <select name="amount" class="form-control" id="exampleFormControlSelect1">
-                    <option value="50">50 ml</option>
-                    <option value="100">100 ml</option>
-                    <option value="200">200 ml</option>
-                    <option value="300" selected="selected">300 ml</option>
-                    <option value="500">500 ml</option>
-                </select>
+                <div class = "input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Type of bevarage</span>
+                    <select name="drink" class="form-control" id="exampleFormControlSelect1">
+                        <option value="Water" selected="selected">Water</option>
+                        <option value="Coffee">Coffee</option>
+                        <option value="Beer">Beer</option>
+                        <option value="Wine">Wine</option>
+                        <option value="Soda">Soda</option>
+                        <option value="Tea">Tea</option>
+                        <option value="Juice">Juice</option>
+                        <option value="Milk">Milk</option>
+                      </select>
+                </div>
+                 <!-- 'Water', 'Coffee', 'Beer', 'Wine', 'Soda', 'Tea', 'Juice', 'Milk' -->     
             </div>
-            <br> -->
+            
             <div class="form-group">
-                <label for="amountRange">Amount (ml)</label>
-                <input name ="amount" min="0" max="500" value="250" type="range" list="tickmarks" class="slider" id="amountRange">
-                <span id="currentValue"></span>
+                <input name ="amount" min="20" max="500" value="250" type="range" list="tickmarks" class="slider" id="amountRange">
+                <div id="amountdiv">
+                    <span>Amount:&nbsp;&nbsp;</span><span id="currentValue"></span><span>&nbsp; ml</span>
+                </div>
             </div>
-            <br>
+
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Location</label>
-                <select name="location" class="form-control" id="exampleFormControlSelect1">
-                    <option value="Home" selected="selected">Home</option>
-                    <option value="Work">Work</option>
-                    <option value="Restaurant">Restaurant</option>
-                    <option value="School">School</option>
-                </select>
+                <div class = "input-group mb-3">
+                    <span class="input-group-text">Location</span>
+                    <select name="location" class="form-control" id="exampleFormControlSelect1">
+                        <option value="Home" selected="selected">Home</option>
+                        <option value="Work">Work</option>
+                        <option value="Restaurant">Restaurant</option>
+                        <option value="School">School</option>
+                    </select>
+                </div>
+                
             </div>
-            <br>
+
             <div class="openBtn">
                 <button class="openButton" onclick="openForm()"><img class = "loginimg" src="{{ url_for('static', filename = 'img/drink.png')  }}"></button>
             </div>

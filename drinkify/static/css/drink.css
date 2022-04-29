@@ -4,8 +4,23 @@
   box-sizing: border-box;
 }
 
-table.table-hover, label, .form-group{
+.input-group-text{
+  width: 40%;
+  text-align: right !important;
   font-family: SFPro;
+}
+
+table.table-hover, .form-group, .form-control, .label{
+  font-family: SFPro;
+}
+
+#amountdiv{
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+
+select.form-control { /* show arrow on dropdowns */  
+  -webkit-appearance: menulist;
 }
 
 .progress{
@@ -23,8 +38,8 @@ table.table-hover, label, .form-group{
 .openBtn {
   display: flex;
   justify-content: center;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 15px;
+  padding-bottom: 30px;
 }
 .openButton {
   border: none;

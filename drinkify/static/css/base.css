@@ -1,7 +1,7 @@
 @font-face { font-family: SFPro; src: url('/static/fonts/SFProDisplay-Regular.ttf'); } 
 @font-face { font-family: SFPro-Bold; src: url('/static/fonts/SFProDisplay-Heavy.ttf'); } 
 body { 
-    padding-top: 65px; 
+    padding-top: 35px; 
     /* background colors*/
     /* Old browsers */
     /* background: #2a0caf; */
