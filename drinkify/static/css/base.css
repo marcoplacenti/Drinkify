@@ -14,6 +14,10 @@ body {
     background: #fafafa;
 }
 
+.navbar.fixed-top.navbar-light.bg-light {
+    font-family: 'SFPro';
+}
+
 h1, h2 {
     font-family:'SFPro-Bold';
     padding-left: 10px;
