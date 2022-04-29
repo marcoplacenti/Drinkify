@@ -8,6 +8,10 @@ table.table-hover{
   font-family: SFPro;
 }
 
+.form-group, .form-control, .label{
+  font-family: SFPro;
+}
+
 .progress{
     margin: 10px 10px 20px;
 }
