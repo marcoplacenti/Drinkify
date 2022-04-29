@@ -65,7 +65,7 @@ def drink():
             "location": "drink"
         }
         df_today = pd.DataFrame([d])
-    return render_template('drink_alt.html', data=send_data, progress=progress, total=total, left_to_go=left_to_go, datatoday = df_today.to_dict(orient='records')) 
+    return render_template('drink.html', data=send_data, progress=progress, total=total, left_to_go=left_to_go, datatoday = df_today.to_dict(orient='records')) 
 
 @app.route('/settings')
 def settings():
