@@ -12,6 +12,10 @@ table.table-hover{
   font-family: SFPro;
 }
 
+select.form-control {
+  -webkit-appearance: menulist;
+}
+
 .progress{
     margin: 10px 10px 20px;
 }
