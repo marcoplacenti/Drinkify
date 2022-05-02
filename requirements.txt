@@ -3,3 +3,4 @@ pymysql
 pyyaml
 pandas
 uuid
+gunicorn
