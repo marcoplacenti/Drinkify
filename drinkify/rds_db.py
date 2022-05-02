@@ -34,7 +34,7 @@ conn = pymysql.connect(
         user = user,
         password = pwd,
         db = db
-        )
+)
 
 cursor=conn.cursor()
 cursor.execute("drop table if exists drink_logs")
