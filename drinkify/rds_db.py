@@ -26,7 +26,7 @@ with open('.credentials.yml') as infile:
     user = cred['user']
     pwd = cred['password']
     db = cred['database']
-
+"""
 conn = pymysql.connect(
         host= host,
         port = 3306,
@@ -34,7 +34,6 @@ conn = pymysql.connect(
         password = pwd,
         db = db
         )
-"""
 
 cursor=conn.cursor()
 cursor.execute("drop table if exists drink_logs")
