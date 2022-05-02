@@ -13,6 +13,13 @@ import uuid
 import random
 random.seed(42)
 
+import os
+host = os.environ['HOST']
+user = os.environ['USER']
+pwd = os.environ['PASSWORD']
+db = os.environ['DATABASE']
+
+"""
 with open('.credentials.yml') as infile:
     cred = yaml.load(infile, Loader=yaml.SafeLoader)
     host = cred['host']
@@ -27,6 +34,7 @@ conn = pymysql.connect(
         password = pwd,
         db = db
         )
+"""
 
 cursor=conn.cursor()
 cursor.execute("drop table if exists drink_logs")
