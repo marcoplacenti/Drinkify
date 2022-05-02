@@ -13,12 +13,20 @@ import uuid
 import random
 random.seed(42)
 
+import os
+host = os.environ['HOST']
+user = os.environ['USER']
+pwd = os.environ['PASSWORD']
+db = os.environ['DATABASE']
+
+"""
 with open('.credentials.yml') as infile:
     cred = yaml.load(infile, Loader=yaml.SafeLoader)
     host = cred['host']
     user = cred['user']
     pwd = cred['password']
     db = cred['database']
+"""
 
 conn = pymysql.connect(
         host= host,
