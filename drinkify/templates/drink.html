@@ -67,7 +67,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <div class = "input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Location</span>
@@ -86,32 +86,12 @@
         </form>
     
     <h2>You have <span id="left">{{left_to_go}}ml</span> to go</h2>
-    
-    <script>
-      function openForm() {
-        document.getElementById("popupForm").style.display = "block";
-      }
-      function closeForm() {
-        document.getElementById("popupForm").style.display = "none";
-      }
-    </script>
 
     <script>
         var date = new Date();
         // we add a zero to the hour or minute if its less than 10 so it becomes two digit
         var currentTime = (date.getHours()<10?'0':'') + date.getHours() + ':' + (date.getMinutes()<10?'0':'') + date.getMinutes();
-        console.log(currentTime)
         document.getElementById('logTime').value = currentTime;        
-    </script>
-
-    <script>
-        var slider = document.getElementById("amountRange");
-        var output = document.getElementById("currentValue");
-        output.innerHTML = slider.value;
-        
-        slider.oninput = function() {
-        output.innerHTML = this.value;
-        }
     </script>
     
     <h3>Your intake today</h3>
