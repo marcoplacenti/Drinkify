@@ -29,26 +29,35 @@
         // let's us use the vegalite api
     </script>
     
-    <div>
-        <h2>Your first graph</h2>
+    <!-- This plot does not work for some reason even though it works in observable -->
+    <!-- <div> 
+        <br>
         <div id="chart1">
             <script src = "{{ url_for('static', filename = 'js/barplot.js')  }}"></script>
         </div>
-    </div>
+    </div> -->
     
+
     <div>
-        <h2>Your second graph</h2>
-        <div id="chart2">
-            <script src = "{{ url_for('static', filename = 'js/lineplot.js')  }}"></script>
+        <br>
+        <div id="chart3">
+            <script src = "{{ url_for('static', filename = 'js/locations.js')  }}"></script>
         </div>
     </div>
 
-    
-    
-    
-    
-    
-    
+    <div>
+        <br>
+        <div id="chart4">
+            <script src = "{{ url_for('static', filename = 'js/stack.js')  }}"></script>
+        </div>
+    </div>
+
+    <div>
+        <br>
+        <div id="chart5">
+            <script src = "{{ url_for('static', filename = 'js/heatmap.js')  }}"></script>
+        </div>
+    </div>
     
     <script>
         // posibility for swiping left and right
