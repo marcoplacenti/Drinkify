@@ -7,7 +7,8 @@ const heatmap = vl.markRect()
     vl.x().fieldO("timestamp").timeUnit("date").title("").axis({labelFontSize: 11}),
     vl.y().fieldO("timestamp").timeUnit("hours").title("").sort("descending").axis({labelFontSize: 11}),
     //vl.color().if(vl.selectInterval().encodings("x").empty("none"), vl.value("firebrick")).value("steelblue"),
-    vl.color().sum("amount").scale({scheme: "spectral", reverse: true}).legend({labelExpr: "datum.label+' ml'", title: "", labelFontSize: 12}),
+    vl.color().sum("amount").scale({scheme: "blues", reverse: false})
+        .legend({orient: "bottom", labelExpr: "datum.label+' ml'", title: "", labelFontSize: 12}),
     vl.tooltip().sum("amount")
     )
 

@@ -20,8 +20,6 @@ const markBar = vl.markBar({width: {"band": 0.8}, cornerRadiusEnd:0, fillOpacity
     .data(data.filter(x => {
         var date = new Date(x.timestamp);
         const d = new Date();
-        console.log(date.getMonth())
-        console.log(d.getMonth())
         return date.getMonth() == d.getMonth();
     }))
     .transform(

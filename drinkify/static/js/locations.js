@@ -11,7 +11,7 @@ const locationPlot = vl.markBar({cornerRadius: 5, width:50}).
 locationPlot
     .data(data)
     .config({view: {stroke: null}}) // no cell borders
-    .width(width) // predefined as width of the screen
+    .width(width-50) // predefined as width of the screen
     .render()
     .then(viewElement => {
         document.getElementById('chart3').appendChild(viewElement); 
