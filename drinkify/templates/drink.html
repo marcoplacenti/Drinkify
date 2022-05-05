@@ -56,7 +56,7 @@
             </div>
             
             <div class="form-group">
-                <input name ="amount" min="20" max="500" value="250" type="range" list="tickmarks" class="slider" id="amountRange">
+                <input name ="amount" min="25" step="25" max="500" value="250" type="range" list="tickmarks" class="slider" id="amountRange">
                 <div id="amountdiv">
                     <span>Amount:&nbsp;&nbsp;</span><span id="currentValue"></span><span>&nbsp; ml</span>
                 </div>
@@ -81,21 +81,11 @@
         </form>
     
     <h2>You have <span id="left">{{left_to_go}}ml</span> to go</h2>
-    
-    <script>
-      function openForm() {
-        document.getElementById("popupForm").style.display = "block";
-      }
-      function closeForm() {
-        document.getElementById("popupForm").style.display = "none";
-      }
-    </script>
 
     <script>
         var date = new Date();
         // we add a zero to the hour or minute if its less than 10 so it becomes two digit
         var currentTime = (date.getHours()<10?'0':'') + date.getHours() + ':' + (date.getMinutes()<10?'0':'') + date.getMinutes();
-        console.log(currentTime)
         document.getElementById('logTime').value = currentTime;        
     </script>
 
