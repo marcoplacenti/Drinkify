@@ -36,8 +36,8 @@
             <input type="time" onload="getTime()" class="form-control" id="logTime" name="logTime" REQUIRED>
             <br>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Type of bevarage</label>
-                <select name="drink" class="form-control" id="exampleFormControlSelect1">
+                <label>Type of bevarage</label>
+                <select name="drink" class="form-control">
                     <option value="Water" selected="selected">Water</option>
                     <option value="Coffee">Coffee</option>
                     <option value="Beer">Beer</option>
@@ -50,8 +50,8 @@
             </div>
             <br>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Amount</label>
-                <select name="amount" class="form-control" id="exampleFormControlSelect1">
+                <label>Amount</label>
+                <select name="amount" class="form-control">
                     <option value="50">50 ml</option>
                     <option value="100">100 ml</option>
                     <option value="200">200 ml</option>
@@ -61,8 +61,8 @@
             </div>
             <br>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Location</label>
-                <select name="location" class="form-control" id="exampleFormControlSelect1">
+                <label>Location</label>
+                <select name="location" class="form-control">
                     <option value="Home" selected="selected">Home</option>
                     <option value="Work">Work</option>
                     <option value="Restaurant">Restaurant</option>
@@ -91,7 +91,6 @@
         var date = new Date();
         // we add a zero to the hour or minute if its less than 10 so it becomes two digit
         var currentTime = (date.getHours()<10?'0':'') + date.getHours() + ':' + (date.getMinutes()<10?'0':'') + date.getMinutes();
-        console.log(currentTime)
         document.getElementById('logTime').value = currentTime;        
     </script>
     
