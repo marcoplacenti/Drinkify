@@ -18,7 +18,12 @@ body {
     font-family: 'SFPro';
 }
 
+h1{
+    font-size: 36px;
+}
+
 h1, h2 {
+    margin: 10px 0;
     font-family:'SFPro-Bold';
     padding-left: 10px;
 }
