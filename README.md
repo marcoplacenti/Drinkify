@@ -8,13 +8,23 @@ This repository contains all the code used for the project in the course 02808 P
 
 ### Installation
 
-To run the app you need python installed and to install the libraries in `requirements.txt`. This can be done using pip:
+To run the app locally you need python installed and to install the libraries in `requirements.txt`. This can be done using pip:
 
 `pip install -r requirements.txt`
+
+You also need to set environment variables. In a conda environment this is done like so
+```
+set HOST=drinkify-db...
+set PORT=...
+set USER=...
+set PASSWORD=...
+set DATABASE=...
+```
+The keys can be found in the .yaml file in the handin. 
 
 ### Executing program
 
 To run the app `cd` to the project directory and run
 ```
-python run.py
+python app.py
 ```
