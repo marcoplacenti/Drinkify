@@ -9,12 +9,14 @@ from datetime import datetime, date
 
 @app.route('/')
 def main():
+    '''
+    Home page was just set to /drink
+    '''
     return redirect("/drink", code=302)
 
 @app.route('/drink', methods = ['get', 'post'])
 def drink():
     data = db.get_drinks()
-    #print(data)
     total = 0
     l = len(data)
     send_data = [None] * l
@@ -28,6 +30,8 @@ def drink():
         }
 
         send_data[-i-1] = d #flip the order so the table is from new to old
+        # we should strictly sort the data by timestamp since you can change the timestamp
+        # when you log but that isn't super important
 
     df = pd.DataFrame(send_data)
     df.timestamp = pd.to_datetime(df.timestamp)
@@ -44,6 +48,7 @@ def drink():
     left_to_go = max(0, int(goal) - total)
     
     if request.method == 'POST':
+        # if a user adds a drink intake
         userID = 1
         drink_id = uuid.uuid1()
         drink = request.form['drink']
@@ -52,10 +57,11 @@ def drink():
         location = request.form['location']
         db.insert_drink(userID, drink_id, drink, amount, timestamp, location)
 
-        return redirect(url_for('drink'))
+        return redirect(url_for('drink')) # send back to updated homepage with new intake showing
+
     df_today['hourminute'] = df_today['timestamp'].dt.strftime('%H:%M')
     df_today['timestamp'] = df_today['timestamp'].dt.strftime('%Y-%m-%d')
-    print(len(df_today))
+    
     if len(df_today) == 0:
         d = {
             "hourminute": "Go",
@@ -71,7 +77,6 @@ def drink():
 def settings():
     goal = db.get_goal()
     data = db.get_drinks()
-    #print(data)
     total = 0
     l = len(data)
     send_data = [None] * l
@@ -99,9 +104,12 @@ def set_goal():
         db.set_goal(goal)
     return redirect("/drink", code=302)
 
-# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4207053/
+
 @app.route('/calcGoal', methods=['get', 'post'])
 def calc_goal():
+    '''
+    Water intake goal is based on this article https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4207053/
+    '''
     if request.method == 'POST':
         sex = request.form['sex']
         age = request.form['age']
@@ -136,8 +144,5 @@ def visuals():
         df.append(d)
     df = pd.DataFrame(df)
     df.timestamp = df.timestamp.apply(pd.to_datetime)
-    # df_hour = df.groupby(pd.Grouper(key="timestamp", freq="H")).sum()
-    # df_hour = df_hour.reset_index()
-    # df_hour['hour'] = df_hour.timestamp.dt.hour
     goal = db.get_goal()
     return render_template('visuals.html', data = df.to_json(orient='records'), goal = goal)

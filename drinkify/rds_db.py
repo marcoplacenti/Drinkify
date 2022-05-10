@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Jul 25 13:34:18 2020
-
-@author: hp
-"""
-
 import pymysql
 import yaml
 from random import randrange
@@ -63,11 +56,14 @@ create table if not exists goals(
 cursor.execute(goal_table)
 conn.commit()
 
-### POPULATE TABLE ###
+### POPULATE TABLE WITH GENERATED DATA ###
 start_date = date(2022, 2, 20)
 end_date = date(2022, 4, 20)
 
 def random_date(start_date, end_date):
+    '''
+    Returns a random date between start_date and end_date
+    '''
     time_between_dates = end_date - start_date
     days_between_dates = time_between_dates.days
     random_number_of_days = random.randrange(days_between_dates)
@@ -78,6 +74,10 @@ def random_date(start_date, end_date):
     return random_date
 
 def tablerow():
+    '''
+    Generates a random table row for our database. Highest probability of water, then coffee and beer,
+    then soda, and then wine, tea, juice and milk
+    '''
     userID = "1"
     drink_id = f"{uuid.uuid1()}"
     drink = random.choice(['Water','Water','Water','Water','Water', 'Coffee','Coffee','Coffee', 
@@ -89,27 +89,34 @@ def tablerow():
     return (userID, f'{drink_id}', f'{drink}', amount, water_amount, f'{date}', f'{location}')
 
 def water_amount_calc(drink, amount):
-     water_amount = None
-     if drink == 'Water':
-         water_amount = amount
-     elif drink == 'Coffee':
-         water_amount = str(int(amount)*0.9875)
-     elif drink == 'Beer':
-         water_amount = str(int(amount)*0.95)
-     elif drink == 'Wine':
-         water_amount = str(int(amount)*0.85)
-     elif drink == 'Soda':
-         water_amount = str(int(amount)*0.90)
-     elif drink == 'Tea':
-         water_amount = str(int(amount)*0.99)
-     elif drink == 'Juice':
-         water_amount = str(int(amount)*0.90)
-     elif drink == 'Milk':
-         water_amount = str(int(amount)*0.87)
-     return water_amount    
+    '''
+    Returns how much water is in a certain type of drink
+    given an amount. The numbers are based on the general percetage of water in the drink. 
+    '''
+    water_amount = None
+    if drink == 'Water':
+        water_amount = amount
+    elif drink == 'Coffee':
+        water_amount = str(int(amount)*0.9875)
+    elif drink == 'Beer':
+        water_amount = str(int(amount)*0.95)
+    elif drink == 'Wine':
+        water_amount = str(int(amount)*0.85)
+    elif drink == 'Soda':
+        water_amount = str(int(amount)*0.90)
+    elif drink == 'Tea':
+        water_amount = str(int(amount)*0.99)
+    elif drink == 'Juice':
+        water_amount = str(int(amount)*0.90)
+    elif drink == 'Milk':
+        water_amount = str(int(amount)*0.87)
+    return water_amount    
 
 
 def query_text(number_of_reps):
+    '''
+    Repeats tablerow() for number_of_reps and returns it in SQL format for INSERT.
+    '''
     s = ""
     for i in range(number_of_reps):
         s += str(tablerow())
@@ -133,7 +140,6 @@ def insert_drink(userID, drink_id, drink, amount, time, location):
     water_amount = water_amount_calc(drink, amount)
 
     timestamp = str(date.today()) + ' ' + time
-    #timestamp = datetime.strptime(today, '%Y-%m-%dT%H:%M').strftime('%Y-%m-%d %H:%M')
 
     cur=conn.cursor()
     cur.execute("INSERT INTO drink_logs (userID, drink_id, drink, amount, water_amount, timestamp, location) VALUES (%s,%s,%s,%s,%s,%s,%s)", (userID, drink_id, drink, amount, water_amount, timestamp, location))
