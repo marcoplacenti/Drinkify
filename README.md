@@ -14,13 +14,13 @@ To run the app locally you need python installed and to install the libraries in
 
 You also need to set environment variables. In a conda environment this is done like so
 ```
-set HOST=drinkify-db...
+set HOST=...
 set PORT=...
 set USER=...
 set PASSWORD=...
 set DATABASE=...
 ```
-The keys can be found in the .yaml file in the handin. The final version can also be found [here](https://drinkifyv3.herokuapp.com/drink). The second version can be found [here](https://drinkifyv2.herokuapp.com/drink) and the first version [here](https://drinkifyv1.herokuapp.com/drink). 
+
 
 ### Executing program
 
@@ -28,3 +28,13 @@ To run the app `cd` to the project directory and run
 ```
 python app.py
 ```
+
+## Versions
+### Final version
+Can be accessed [here](https://drinkifyv3.herokuapp.com/drink). 
+
+### Second version
+The second version can be accessed [here](https://drinkifyv2.herokuapp.com/drink).
+
+### The first version
+The first version can be accessed [here](https://drinkifyv1.herokuapp.com/drink). 
