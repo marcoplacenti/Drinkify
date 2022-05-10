@@ -4,8 +4,23 @@
   box-sizing: border-box;
 }
 
-table.table-hover{
+.input-group-text{
+  width: 40%;
+  text-align: right !important;
   font-family: SFPro;
+}
+
+table.table-hover, .form-group, .form-control, .label{
+  font-family: SFPro;
+}
+
+#amountdiv{
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+
+select.form-control { /* show arrow on dropdowns */  
+  -webkit-appearance: menulist;
 }
 
 .progress{
@@ -23,8 +38,8 @@ table.table-hover{
 .openBtn {
   display: flex;
   justify-content: center;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 15px;
+  padding-bottom: 30px;
 }
 .openButton {
   border: none;
@@ -52,6 +67,7 @@ table.table-hover{
   min-width: 250px;
   max-width: 500px;
   padding: 20px;
+  margin: auto;
   background-color: #fff;
 }
 .formContainer input[type=text],
@@ -70,7 +86,7 @@ table.table-hover{
 .formContainer .btn {
   padding: 12px 20px;
   border: none;
-  background-color: #8ebf42;
+  background-color: #1c87c9;
   color: #fff;
   cursor: pointer;
   width: 100%;
@@ -83,4 +99,39 @@ table.table-hover{
 .formContainer .btn:hover,
 .openButton:hover {
   opacity: 1;
+}
+
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #1c87c9;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #1c87c9;
+  cursor: pointer;
 }

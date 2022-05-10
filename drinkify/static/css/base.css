@@ -1,7 +1,7 @@
 @font-face { font-family: SFPro; src: url('/static/fonts/SFProDisplay-Regular.ttf'); } 
 @font-face { font-family: SFPro-Bold; src: url('/static/fonts/SFProDisplay-Heavy.ttf'); } 
 body { 
-    padding-top: 65px; 
+    padding-top: 35px; 
     /* background colors*/
     /* Old browsers */
     /* background: #2a0caf; */
@@ -10,9 +10,20 @@ body {
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /* background: linear-gradient(180deg, #ffffff, #5fbcf1); */
     
+    /* color: #1c87c9; */
+    background: #fafafa;
+}
+
+.navbar.fixed-top.navbar-light.bg-light {
+    font-family: 'SFPro';
+}
+
+h1{
+    font-size: 36px;
 }
 
 h1, h2 {
+    margin: 10px 0;
     font-family:'SFPro-Bold';
     padding-left: 10px;
 }
